@@ -149,7 +149,10 @@ namespace DSZI_2018
         private void PopulateFieldsWithFood(int amount)
         {
             for (int i = 0; i < amount; ++i)
-                GetRandomEmptyField().SetContent(Field.CONTENT.Food, null, Utils.GetRandom(2, 11) * 5);
+            {
+                Food food = Foods.GetRandomFood();
+                GetRandomEmptyField().SetContent(Field.CONTENT.Food, food.Sprite, food.Value);
+            }
         }
 
         public void MakeRandomMove()

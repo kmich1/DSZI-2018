@@ -30,7 +30,7 @@ namespace DSZI_2018
             .Select(Path.GetFileName)
             .ToArray();
 
-        public static Food GetRandomCoin()
+        public static Food GetRandomFood()
         {
             string path = Paths[Utils.GetRandom(0, Paths.Length)];
 
