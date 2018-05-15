@@ -13,14 +13,22 @@ namespace DSZI_2018
     {
         static void Main(string[] args)
         {
-            RenderWindow window = new RenderWindow(new VideoMode(1000, 800), "Coin collecting agent", Styles.Default);
+            RenderWindow window = new RenderWindow(new VideoMode((uint)Config.WINDOW_WIDTH, (uint)Config.WINDOW_HEIGHT), "Coin collecting agent", Styles.Default);
+
+            Game game = new Game();
 
             window.Closed += (object sender, EventArgs arg) => window.Close();
+            window.KeyPressed += (object sender, KeyEventArgs arg) =>
+            {
+                if (arg.Code == Keyboard.Key.Space)
+                    game.MakeRandomMove();
+            };
 
             while (window.IsOpen)
             {
                 window.DispatchEvents();
-                window.Clear();
+                window.Clear(Config.BACKGROUND_COLOR);
+                game.Update(window);
                 window.Display();
             }
         }
