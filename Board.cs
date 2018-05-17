@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using SFML.Graphics;
 using SFML.System;
 
@@ -19,6 +20,8 @@ namespace DSZI_2018
 
         private RectangleShape Shape { get; }
         private RectangleShape[] Borders { get; }
+
+        private List<Field> Moves { get; }
 
         public Board()
         {
@@ -75,6 +78,8 @@ namespace DSZI_2018
                     FillColor = Config.WALL_COLOR
                 },
             };
+
+            Moves = new List<Field>();
         }
 
         private Field GetRandomField() => 
@@ -155,9 +160,25 @@ namespace DSZI_2018
             }
         }
 
-        public void MakeRandomMove()
+        public void CreatePath()
         {
-            Agent.SetField(GetRandomFieldNeighbour(Agent.Field));
+            Field target = Fields[0][0];
+            foreach (Field[] fieldRow in Fields)
+                foreach (Field field in fieldRow)
+                    if (field.Content == Field.CONTENT.Food || field.Content == Field.CONTENT.Coins)
+                        target = field;
+            Algorithms.FindWay(Fields, Walls, Agent.Field, target).ForEach((Field field) => Moves.Add(field));
+        }
+
+        public void Move()
+        {
+            if (Moves.Count > 0)
+            {
+                Agent.SetField(Moves[0]);
+                Moves.RemoveAt(0);
+                if (Moves.Count == 0)
+                    PopulateFieldsWithFood(1);
+            }
         }
 
         public void Draw(RenderTarget target, RenderStates states)

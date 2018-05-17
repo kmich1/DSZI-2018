@@ -8,7 +8,7 @@ using SFML.System;
 
 namespace DSZI_2018
 {
-    class Agent
+    public class Agent
     {
         public Field Field { get; private set; }
         public int Food { get; private set; }

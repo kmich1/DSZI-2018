@@ -8,7 +8,7 @@ using SFML.System;
 
 namespace DSZI_2018
 {
-    class Field : Drawable
+    public class Field : Drawable
     {
         public enum CONTENT { Agent, Empty, Coins, Food };
 
