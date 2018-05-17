@@ -12,7 +12,8 @@ import java.util.PriorityQueue;
  * @author Marcelo Surriabre
  */
 public class AStar {
-    private static int DEFAULT_HV_COST = 10; // Horizontal - Vertical Cost
+    private static int DEFAULT_HV_COST = 10; 
+    private static int DEAFULT_SAND_COST = 20;// Horizontal - Vertical Cost
    // private static int DEFAULT_DIAGONAL_COST = 14;
     private int hvCost;
     //private int diagonalCost;
@@ -47,6 +48,7 @@ public class AStar {
             for (int j = 0; j < searchArea[0].length; j++) {
                 Node node = new Node(i, j);
                 node.calculateHeuristic(getFinalNode());
+               
                 this.searchArea[i][j] = node;
             }
         }
@@ -56,6 +58,13 @@ public class AStar {
         for (int i = 0; i < blocksArray.length; i++) {
             int row = blocksArray[i][0];
             int col = blocksArray[i][1];
+            setBlock(row, col);
+        }
+    }
+    public void setSand(int[][] sand) {
+        for (int i = 0; i < sand.length; i++) {
+            int row = sand[i][0];
+            int col = sand[i][1];
             setBlock(row, col);
         }
     }
@@ -107,6 +116,7 @@ public class AStar {
         int middleRow = row;
         if (col - 1 >= 0) {
             checkNode(currentNode, col - 1, middleRow, getHvCost());
+            
         }
         if (col + 1 < getSearchArea()[0].length) {
             checkNode(currentNode, col + 1, middleRow, getHvCost());
@@ -126,6 +136,10 @@ public class AStar {
     private void checkNode(Node currentNode, int col, int row, int cost) {
         Node adjacentNode = getSearchArea()[row][col];
         if (!adjacentNode.isBlock() && !getClosedList().contains(adjacentNode)) {
+            if (adjacentNode.isSand() && !getOpenList().contains(adjacentNode)) {
+                adjacentNode.setNodeData(currentNode, DEAFULT_SAND_COST);
+                getOpenList().add(adjacentNode);
+            } 
             if (!getOpenList().contains(adjacentNode)) {
                 adjacentNode.setNodeData(currentNode, cost);
                 getOpenList().add(adjacentNode);

@@ -23,7 +23,7 @@ public class Node {
     }
 
     public void calculateHeuristic(Node finalNode) {
-        this.h = Math.abs(finalNode.getRow() - getRow()) + Math.abs(finalNode.getCol() - getCol());
+        this.h = Math.abs(finalNode.getRow() - getRow()) + Math.abs(finalNode.getCol() - getCol())*10;
     }
 
     public void setNodeData(Node currentNode, int cost) {
@@ -31,6 +31,7 @@ public class Node {
         setParent(currentNode);
         setG(gCost);
         calculateFinalCost();
+        
     }
 
     public boolean checkBetterPath(Node currentNode, int cost) {
@@ -97,6 +98,11 @@ public class Node {
     public void setBlock(boolean isBlock) {
         this.isBlock = isBlock;
     }
+    public boolean isSand() {
+        return isBlock;
+    }
+
+    
 
     public int getRow() {
         return row;
