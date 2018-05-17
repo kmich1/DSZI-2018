@@ -7,7 +7,7 @@ using SFML.Graphics;
 
 namespace DSZI_2018
 {
-    class Game : Drawable
+    public class Game : Drawable
     {
         private Board Board { get; }
 
@@ -16,9 +16,14 @@ namespace DSZI_2018
             Board = new Board();
         }
 
-        public void MakeRandomMove()
+        public void CreatePath()
         {
-            Board.MakeRandomMove();
+            Board.CreatePath();
+        }
+
+        public void Move()
+        {
+            Board.Move();
         }
 
         public void Update(RenderTarget target)
