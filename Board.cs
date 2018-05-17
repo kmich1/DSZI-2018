@@ -176,6 +176,7 @@ namespace DSZI_2018
             {
                 Agent.SetField(Moves[0]);
                 Moves.RemoveAt(0);
+                // for astar demo purposes
                 if (Moves.Count == 0)
                     PopulateFieldsWithFood(1);
             }
