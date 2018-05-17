@@ -11,29 +11,35 @@ namespace DSZI_2018
 {
     public static class Algorithms
     {
-        public static List<Field> FindWay(Field[][] fields, Wall[] walls, Field startField, Field targetField)
+        public static List<Field> FindWay(Field[][] fields, List<Wall> walls, Field startField, Field targetField)
         {
-            string dimensions = (Config.FIELD_COLUMNS_AMOUNT * 2 - 1).ToString() + (Config.FIELD_ROWS_AMOUNT * 2 - 1).ToString();
+            string dimensions = (Config.FIELD_COLUMNS_AMOUNT * 2 - 1).ToString() + " " + (Config.FIELD_ROWS_AMOUNT * 2 - 1).ToString();
 
-            string start = (startField.X * 2).ToString() + (startField.Y * 2).ToString();
-            string target = (targetField.X * 2).ToString() + (targetField.Y * 2).ToString();
+            string start = (startField.X * 2).ToString() + " " + (startField.Y * 2).ToString();
+            string target = (targetField.X * 2).ToString() + " " + (targetField.Y * 2).ToString();
 
             string obstacles = "";
             for (int i = 1; i < Config.FIELD_COLUMNS_AMOUNT * 2 - 1; i += 2)
                 for (int j = 1; j < Config.FIELD_ROWS_AMOUNT * 2 - 1; j += 2)
-                    obstacles += i.ToString() + j.ToString();
+                    obstacles += i.ToString() + " " + j.ToString() + " ";
 
-            foreach (Wall wall in walls)
+            string fieldsWithSand = "";
+            foreach (int[] coords in Config.FIELDS_WITH_SAND)
+                fieldsWithSand += (coords[0] * 2).ToString() + " " + (coords[1] * 2).ToString() + " ";
+
+            walls.ForEach((Wall wall) => {
                 obstacles += wall.Fields[0].X == wall.Fields[1].X
                     ? (wall.Fields[0].X * 2).ToString() + (Math.Min(wall.Fields[0].Y, wall.Fields[1].Y) * 2 + 1).ToString()
                     : (Math.Min(wall.Fields[0].X, wall.Fields[1].X) * 2 + 1).ToString() + (wall.Fields[0].Y * 2).ToString();
+            });
             
             File.WriteAllText(
                 ".\\wejscie.txt", 
                 dimensions + Environment.NewLine + 
                 start + Environment.NewLine + 
                 target + Environment.NewLine + 
-                obstacles + Environment.NewLine
+                obstacles + Environment.NewLine +
+                fieldsWithSand + Environment.NewLine
             );
 
             var proc = new Process();
