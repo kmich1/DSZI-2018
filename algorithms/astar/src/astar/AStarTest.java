@@ -61,6 +61,8 @@ public class AStarTest {
         }
        
         //int[][] blocksArray = new int[][] { { 1, 3 }, {2,3}, {3 ,3} };
+        int[][] sand = new int[][] { { 0, 3 }, {4,4}, {6,4}, {2,8}};
+        aStar.setSand(sand);
         aStar.setBlocks(blocksArray);
         
         List<Node> path = aStar.findPath();

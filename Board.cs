@@ -12,7 +12,7 @@ namespace DSZI_2018
     class Board : Drawable
     {
         public Field[][] Fields { get; }
-        public Wall[] Walls { get; }
+        public List<Wall> Walls { get; }
         public Agent Agent { get; }
 
         public FoodBar FoodBar { get; }
@@ -37,7 +37,7 @@ namespace DSZI_2018
             
             Walls = GenerateUniqueFieldPairs(Config.WALLS_AMOUNT)
                 .Select(pair => new Wall(pair[0], pair[1]))
-                .ToArray();
+                .ToList();
             
             Agent = new Agent(GetRandomEmptyField());
 
@@ -113,9 +113,9 @@ namespace DSZI_2018
                                 : field.Y + (Utils.GetRandom(0, 2) > 0 ? 1 : -1)
                     ];
 
-        private Field[][] GenerateUniqueFieldPairs(int amount)
+        private List<Field[]> GenerateUniqueFieldPairs(int amount)
         {
-            Field[][] pairs = new Field[amount][];
+            List<Field[]> pairs = new List<Field[]>();
 
             for (int i = 0; i < amount; ++i)
             {
@@ -124,24 +124,17 @@ namespace DSZI_2018
                 {
                     newPair[0] = GetRandomField();
                     newPair[1] = GetRandomFieldNeighbour(newPair[0]);
-                } while (Array.Exists(pairs, pair => newPair.All(field => pair != null && pair.Contains(field)))); // try until a unique pair is generated
-                pairs[i] = newPair;
+                } while (
+                    pairs.Exists(pair => 
+                        newPair.All(field => pair != null && pair.Contains(field))
+                    )
+                ); // try until a unique pair is generated
+                pairs.Add(newPair);
             }
 
             return pairs;
         }
-        /*
-        private Wall[] GenerateWalls(float probability)
-        {
-            List<Wall> walls = new List<Wall>();
-            foreach (Field[] fields in Fields)
-                foreach (Field field in fields)
-                    if (field.X % 2 == 1 && field.Y % 2 == 1)
-                    {
 
-                    }
-        }
-        */
         private void PopulateFieldsWithCoins(int amount)
         {
             for (int i = 0; i < amount; ++i)
@@ -190,8 +183,7 @@ namespace DSZI_2018
                 foreach (Field field in fields)
                     target.Draw(field);
 
-            foreach (Wall wall in Walls)
-                target.Draw(wall);
+            Walls.ForEach((Wall wall) => target.Draw(wall));
 
             foreach (RectangleShape border in Borders)
                 target.Draw(border);
