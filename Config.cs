@@ -11,6 +11,7 @@ namespace DSZI_2018
     {
         public static int FIELD_ROWS_AMOUNT = 7;
         public static int FIELD_COLUMNS_AMOUNT = 9;
+        public static string PATH_ASTAR = ".\\algorithms\\astar\\dist";
 
         public static int WALLS_AMOUNT = 20;
         public static int FIELDS_WITH_COINS_AMOUNT = 5;
