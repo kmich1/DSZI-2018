@@ -29,17 +29,17 @@ namespace DSZI_2018
 
             walls.ForEach((Wall wall) => {
                 obstacles += wall.Fields[0].X == wall.Fields[1].X
-                    ? (wall.Fields[0].X * 2).ToString() + (Math.Min(wall.Fields[0].Y, wall.Fields[1].Y) * 2 + 1).ToString()
-                    : (Math.Min(wall.Fields[0].X, wall.Fields[1].X) * 2 + 1).ToString() + (wall.Fields[0].Y * 2).ToString();
+                    ? (wall.Fields[0].X * 2).ToString() + " " + (Math.Min(wall.Fields[0].Y, wall.Fields[1].Y) * 2 + 1).ToString() + " "
+                    : (Math.Min(wall.Fields[0].X, wall.Fields[1].X) * 2 + 1).ToString() + " " + (wall.Fields[0].Y * 2).ToString() + " ";
             });
             
             File.WriteAllText(
                 ".\\wejscie.txt", 
-                dimensions + Environment.NewLine + 
-                start + Environment.NewLine + 
-                target + Environment.NewLine + 
-                obstacles + Environment.NewLine +
-                fieldsWithSand + Environment.NewLine
+                dimensions.Trim() + Environment.NewLine + 
+                start.Trim() + Environment.NewLine + 
+                target.Trim() + Environment.NewLine + 
+                obstacles.Trim() + Environment.NewLine +
+                fieldsWithSand.Trim() + Environment.NewLine
             );
 
             var proc = new Process();
