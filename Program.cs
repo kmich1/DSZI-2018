@@ -17,15 +17,23 @@ namespace DSZI_2018
 
             Game game = new Game();
 
+            Clock clock = new Clock();
+
             window.Closed += (object sender, EventArgs arg) => window.Close();
             window.KeyPressed += (object sender, KeyEventArgs arg) =>
             {
                 if (arg.Code == Keyboard.Key.Space)
-                    game.MakeRandomMove();
+                    game.CreatePath();
             };
 
             while (window.IsOpen)
             {
+                if (clock.ElapsedTime.AsMilliseconds() > 500)
+                {
+                    game.Move();
+                    clock.Restart();
+                }
+
                 window.DispatchEvents();
                 window.Clear(Config.BACKGROUND_COLOR);
                 game.Update(window);
