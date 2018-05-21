@@ -1,25 +1,28 @@
 package astar;
 
-/**
- * Node Class
- *
- * @author Marcelo Surriabre
- * @version 2.0, 2018-02-23
- */
+
 public class Node {
 
+    private int dokad;
+    private int poprzednik;
     private int g;
     private int f;
     private int h;
     private int row;
     private int col;
     private boolean isBlock;
+    private boolean isSand;
     private Node parent;
 
     public Node(int row, int col) {
         super();
         this.row = row;
         this.col = col;
+    }
+    public Node(int poprzednik) {
+        super();
+        this.poprzednik = poprzednik;
+
     }
 
     public void calculateHeuristic(Node finalNode) {
@@ -98,8 +101,13 @@ public class Node {
     public void setBlock(boolean isBlock) {
         this.isBlock = isBlock;
     }
+
+    public void setSand(boolean isSand) {
+        this.isSand = isSand;
+    }
+
     public boolean isSand() {
-        return isBlock;
+        return isSand;
     }
 
     
