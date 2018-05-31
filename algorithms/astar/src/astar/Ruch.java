@@ -37,17 +37,17 @@ public class Ruch {
             {
                 instrukcje=instrukcje+"1";
             }
-            if(    (map.values().toArray()[k].equals("polnoc") && map.values().toArray()[k+1].equals("zachod"))
-                || (map.values().toArray()[k].equals("zachod") && map.values().toArray()[k+1].equals("poludnie"))
-                || (map.values().toArray()[k].equals("poludnie") && map.values().toArray()[k+1].equals("wschod"))
-                || (map.values().toArray()[k].equals("wschod") && map.values().toArray()[k+1].equals("polnoc")))
-            {
-                instrukcje = instrukcje + "21";
-            }
             if(    (map.values().toArray()[k].equals("polnoc") && map.values().toArray()[k+1].equals("wschod"))
                 || (map.values().toArray()[k].equals("wschod") && map.values().toArray()[k+1].equals("poludnie"))
                 || (map.values().toArray()[k].equals("poludnie") && map.values().toArray()[k+1].equals("zachod"))
                 || (map.values().toArray()[k].equals("zachod") && map.values().toArray()[k+1].equals("polnoc")))
+            {
+                instrukcje = instrukcje + "21";
+            }
+            if(    (map.values().toArray()[k].equals("polnoc") && map.values().toArray()[k+1].equals("zachod"))
+                || (map.values().toArray()[k].equals("zachod") && map.values().toArray()[k+1].equals("poludnie"))
+                || (map.values().toArray()[k].equals("poludnie") && map.values().toArray()[k+1].equals("wschod"))
+                || (map.values().toArray()[k].equals("wschod") && map.values().toArray()[k+1].equals("polnoc")))
             {
                 
                 instrukcje = instrukcje + "31";

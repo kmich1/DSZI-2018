@@ -122,8 +122,8 @@ public class AStarTest {
            for(int z = 0; z<2; z=z+2)
            {
                
-               if(nodes[j][z]==nodes[j+1][z] && nodes[j][z+1]<nodes[j+1][z+1]) {s = s + "zachod ";}
-               if(nodes[j][z]==nodes[j+1][z] && nodes[j][z+1]>nodes[j+1][z+1]) { s = s + "wschod ";}
+               if(nodes[j][z]==nodes[j+1][z] && nodes[j][z+1]<nodes[j+1][z+1]) {s = s + "wschod ";}
+               if(nodes[j][z]==nodes[j+1][z] && nodes[j][z+1]>nodes[j+1][z+1]) { s = s + "zachod";}
                if(nodes[j][z]>nodes[j+1][z] && nodes[j][z+1]==nodes[j+1][z+1]) { s = s + "polnoc ";}
                if(nodes[j][z]<nodes[j+1][z] && nodes[j][z+1]==nodes[j+1][z+1]) { s = s + "poludnie ";}
            }
