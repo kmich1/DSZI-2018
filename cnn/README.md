@@ -1,5 +1,12 @@
 ﻿# Convolutional neural network for multiclass coin classification
 
+#### Dependencies
+---
+- python3
+- tensorflow
+- keras
+- numpy
+
 #### Classes map
 ---
 ```
