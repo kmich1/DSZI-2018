@@ -9,8 +9,9 @@ using SFML.System;
 
 namespace DSZI_2018
 {
-    class Board : Drawable
+    public class Board : Drawable
     {
+        public enum MOVE { Left, Right, Step }
         public Field[][] Fields { get; }
         public List<Wall> Walls { get; }
         public Agent Agent { get; }
@@ -21,7 +22,7 @@ namespace DSZI_2018
         private RectangleShape Shape { get; }
         private RectangleShape[] Borders { get; }
 
-        private List<Field> Moves { get; }
+        private List<MOVE> Moves { get; }
 
         public Board()
         {
@@ -39,7 +40,7 @@ namespace DSZI_2018
                 .Select(pair => new Wall(pair[0], pair[1]))
                 .ToList();
             
-            Agent = new Agent(GetRandomEmptyField());
+            Agent = new Agent(GetRandomEmptyField(), Agent.ORIENTATION.North);
 
             FoodBar = new FoodBar(Agent);
 
@@ -79,7 +80,7 @@ namespace DSZI_2018
                 },
             };
 
-            Moves = new List<Field>();
+            Moves = new List<MOVE>();
         }
 
         private Field GetRandomField() => 
@@ -160,18 +161,38 @@ namespace DSZI_2018
                 foreach (Field field in fieldRow)
                     if (field.Content == Field.CONTENT.Food || field.Content == Field.CONTENT.Coins)
                         target = field;
-            Algorithms.FindWay(Fields, Walls, Agent.Field, target).ForEach((Field field) => Moves.Add(field));
+            Algorithms.FindWay(Fields, Walls, Agent, target).ForEach((MOVE move) => Moves.Add(move));
         }
 
         public void Move()
         {
             if (Moves.Count > 0)
             {
-                Agent.SetField(Moves[0]);
+                if (Moves[0] == MOVE.Step)
+                {
+                    switch (Agent.Orientation)
+                    {
+                        case Agent.ORIENTATION.North:
+                            Agent.SetField(Fields[Agent.Field.X][Agent.Field.Y - 1]);
+                            break;
+                        case Agent.ORIENTATION.East:
+                            Agent.SetField(Fields[Agent.Field.X + 1][Agent.Field.Y]);
+                            break;
+                        case Agent.ORIENTATION.South:
+                            Agent.SetField(Fields[Agent.Field.X][Agent.Field.Y + 1]);
+                            break;
+                        case Agent.ORIENTATION.West:
+                            Agent.SetField(Fields[Agent.Field.X - 1][Agent.Field.Y]);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    Agent.Turn(Moves[0]);
+                }
                 Moves.RemoveAt(0);
-                // for astar demo purposes
-                if (Moves.Count == 0)
-                    PopulateFieldsWithFood(1);
             }
         }
 

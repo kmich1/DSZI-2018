@@ -69,7 +69,7 @@ public class AStarTest {
                  blocksArray[i][j+1] = Integer.parseInt((parts4[t+1]));
                  
                  //blocksArray[i][j+1] = Character.getNumericValue(kamienie.charAt(t+1));
-                // System.out.println(blocksArray[i][j] + " " + blocksArray[i][j+1]);
+                // System.out.println("lab: " + blocksArray[i][j] + " " + blocksArray[i][j+1]);
                  t=t+2;
              }
         }
@@ -109,7 +109,7 @@ public class AStarTest {
              nodes[i][k] = node.getRow();
              nodes[i][k+1] = node.getCol();
                  
-            // System.out.println(nodes[i][k] + " " + nodes[i][k+1]);
+             //System.out.println(nodes[i][k] + " " + nodes[i][k+1]);
              i = i+1;
              
            
@@ -123,7 +123,7 @@ public class AStarTest {
            {
                
                if(nodes[j][z]==nodes[j+1][z] && nodes[j][z+1]<nodes[j+1][z+1]) {s = s + "wschod ";}
-               if(nodes[j][z]==nodes[j+1][z] && nodes[j][z+1]>nodes[j+1][z+1]) { s = s + "zachod";}
+               if(nodes[j][z]==nodes[j+1][z] && nodes[j][z+1]>nodes[j+1][z+1]) { s = s + "zachod ";}
                if(nodes[j][z]>nodes[j+1][z] && nodes[j][z+1]==nodes[j+1][z+1]) { s = s + "polnoc ";}
                if(nodes[j][z]<nodes[j+1][z] && nodes[j][z+1]==nodes[j+1][z+1]) { s = s + "poludnie ";}
            }
@@ -148,7 +148,7 @@ public class AStarTest {
              
            
         }
-       // System.out.println(mapa);
+        //System.out.println(mapa);
         //TUTAJ JEST WEZEL + KIERUNEK
         Ruch ruch = new Ruch();
         ruch.findWay(mapa);
