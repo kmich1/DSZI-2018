@@ -8,7 +8,7 @@ using SFML.System;
 
 namespace DSZI_2018
 {
-    class FoodBar : Drawable
+    public class FoodBar : Drawable
     {
         private RectangleShape Background { get; }
         private RectangleShape Filling { get; }

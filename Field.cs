@@ -8,7 +8,7 @@ using SFML.System;
 
 namespace DSZI_2018
 {
-    class Field : Drawable
+    public class Field : Drawable
     {
         public enum CONTENT { Agent, Empty, Coins, Food };
 
@@ -37,12 +37,16 @@ namespace DSZI_2018
                 ),
                 FillColor = Config.FIELD_COLOR
             };
+
+            foreach (int[] coords in Config.FIELDS_WITH_SAND)
+                if (X == coords[0] && Y == coords[1])
+                    Shape.FillColor = Config.FIELD_SAND_COLOR;
         }
 
         public void SetContent(CONTENT content, Sprite sprite = null, int value = 0)
         {
             Content = content;
-            Sprite = sprite != null ? sprite : null;
+            Sprite = sprite ?? null;
             if (Sprite != null)
                 Sprite.Position = Shape.Position;
             Value = value;

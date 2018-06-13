@@ -9,12 +9,16 @@ namespace DSZI_2018
 {
     public static class Config
     {
-        public static int FIELD_ROWS_AMOUNT = 7;
-        public static int FIELD_COLUMNS_AMOUNT = 9;
+        public static string PATH_ASTAR = ".\\algorithms\\astar\\dist";
 
-        public static int WALLS_AMOUNT = 20;
-        public static int FIELDS_WITH_COINS_AMOUNT = 5;
-        public static int FIELDS_WITH_FOOD_AMOUNT = 5;
+        public static int[][] FIELDS_WITH_SAND = { new int[] {0, 1}, new int[] {2, 2}, new int[] {3, 2}, new int[] {1, 4} };
+
+        public static int FIELD_ROWS_AMOUNT = 5;
+        public static int FIELD_COLUMNS_AMOUNT = 5;
+
+        public static int WALLS_AMOUNT = 10;
+        public static int FIELDS_WITH_COINS_AMOUNT = 0;
+        public static int FIELDS_WITH_FOOD_AMOUNT = 1;
 
         public static int FIELD_SIZE = 80;
         public static int GAP_SIZE = 10; // gaps between fields
@@ -34,6 +38,7 @@ namespace DSZI_2018
 
         public static Color BACKGROUND_COLOR = new Color(230, 240, 245);
         public static Color FIELD_COLOR = new Color(230, 230, 220);
+        public static Color FIELD_SAND_COLOR = new Color(170, 140, 80);
         public static Color WALL_COLOR = new Color(100, 90, 60);
         public static Color GOLD_COLOR = new Color(140, 130, 0);
         public static Color FOOD_BAR_COLOR = new Color(240, 145, 145);

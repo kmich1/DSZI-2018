@@ -8,7 +8,7 @@ using SFML.System;
 
 namespace DSZI_2018
 {
-    class Wall : Drawable
+    public class Wall : Drawable
     {
         public Field[] Fields { get; }
 

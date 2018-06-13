@@ -8,7 +8,7 @@ using SFML.System;
 
 namespace DSZI_2018
 {
-    class CoinBar : Drawable
+    public class CoinBar : Drawable
     {
         private Sprite Icon { get; }
         private Text Text { get; }
