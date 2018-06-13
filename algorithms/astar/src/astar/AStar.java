@@ -5,15 +5,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-/**
- * A Star Algorithm
- *
- * @version 2.0, 2017-02-23
- * @author Marcelo Surriabre
- */
 public class AStar {
     private static int DEFAULT_HV_COST = 10; 
-    private static int DEAFULT_SAND_COST = 20;// Horizontal - Vertical Cost
+    private static int DEAFULT_SAND_COST = 30;// Horizontal - Vertical Cost
    // private static int DEFAULT_DIAGONAL_COST = 14;
     private int hvCost;
     //private int diagonalCost;
@@ -65,7 +59,7 @@ public class AStar {
         for (int i = 0; i < sand.length; i++) {
             int row = sand[i][0];
             int col = sand[i][1];
-            setBlock(row, col);
+            setSand(row, col);
         }
     }
 
@@ -136,12 +130,12 @@ public class AStar {
     private void checkNode(Node currentNode, int col, int row, int cost) {
         Node adjacentNode = getSearchArea()[row][col];
         if (!adjacentNode.isBlock() && !getClosedList().contains(adjacentNode)) {
-            if (adjacentNode.isSand() && !getOpenList().contains(adjacentNode)) {
-                adjacentNode.setNodeData(currentNode, DEAFULT_SAND_COST);
-                getOpenList().add(adjacentNode);
-            } 
             if (!getOpenList().contains(adjacentNode)) {
-                adjacentNode.setNodeData(currentNode, cost);
+                if(adjacentNode.isSand()){
+                adjacentNode.setNodeData(currentNode, DEAFULT_SAND_COST);
+                getOpenList().add(adjacentNode);}
+               else if(!adjacentNode.isSand())
+                    adjacentNode.setNodeData(currentNode, cost);
                 getOpenList().add(adjacentNode);
             } else {
                 boolean changed = adjacentNode.checkBetterPath(currentNode, cost);
@@ -165,6 +159,10 @@ public class AStar {
 
     private void setBlock(int row, int col) {
         this.searchArea[row][col].setBlock(true);
+    }
+
+    private void setSand(int row, int col) {
+        this.searchArea[row][col].setSand(true);
     }
 
     public Node getInitialNode() {

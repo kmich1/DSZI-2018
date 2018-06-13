@@ -274,3 +274,5 @@ FakesAssemblies/
 !OpenTK.Compatibility.dll
 !OpenTK.dll
 !SFML.Net/*
+/algorithms/astar/dist/
+/algorithms/astar/nbproject/private/
