@@ -25,24 +25,26 @@ namespace DSZI_2018
 
     public static class Coins
     {
-        private static string[] Paths = Directory
-            .GetFiles("./data/coins/")
+        private static string[] FileNames = Directory
+            .GetFiles("./data/coins/validation", "*", SearchOption.AllDirectories)
             .Select(Path.GetFileName)
             .ToArray();
 
         public static Coin GetRandomCoin()
         {
-            string path = Paths[Utils.GetRandom(0, Paths.Length)];
+            string fileName = FileNames[Utils.GetRandom(0, FileNames.Length)];
 
-            Texture texture = new Texture("./data/coins/" + path);
+            string directoryName = fileName.Split('_')[0];
+
+            Texture texture = new Texture("./data/coins/validation/" + directoryName + "/" + fileName);
             Sprite sprite = new Sprite(texture)
             {
                 Scale = new Vector2f((float)Config.FIELD_SIZE / (float)texture.Size.X, (float)Config.FIELD_SIZE / (float)texture.Size.Y)
             };
 
-            int value = Int32.Parse(path.Split('_')[0]);
+            int value = Int32.Parse(directoryName);
 
-            return new Coin(path, sprite, value);
+            return new Coin(fileName, sprite, value);
         }
     }
 }
