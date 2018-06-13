@@ -6,7 +6,7 @@ from keras.preprocessing import image
 img_size = 50
 imgs_list = []
 
-model = load_model('models/bc_4xCNN_4xFCL_25epochs.h5')
+model = load_model('models/bc_3xCNN_4xFCL_25epochs.h5')
 model.compile(
 	loss='categorical_crossentropy',
     optimizer='rmsprop',
