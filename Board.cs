@@ -156,12 +156,7 @@ namespace DSZI_2018
 
         public void CreatePath()
         {
-            Field target = Fields[0][0];
-            foreach (Field[] fieldRow in Fields)
-                foreach (Field field in fieldRow)
-                    if (field.Content == Field.CONTENT.Food || field.Content == Field.CONTENT.Coins)
-                        target = field;
-            Algorithms.FindWay(Fields, Walls, Agent, target).ForEach((MOVE move) => Moves.Add(move));
+            Algorithms.FindWay(Fields, Walls, Agent).ForEach((MOVE move) => Moves.Add(move));
         }
 
         public void Move()
@@ -170,23 +165,36 @@ namespace DSZI_2018
             {
                 if (Moves[0] == MOVE.Step)
                 {
+                    Field target = Agent.Field;
+
                     switch (Agent.Orientation)
                     {
                         case Agent.ORIENTATION.North:
-                            Agent.SetField(Fields[Agent.Field.X][Agent.Field.Y - 1]);
+                            target = Fields[Agent.Field.X][Agent.Field.Y - 1];
                             break;
                         case Agent.ORIENTATION.East:
-                            Agent.SetField(Fields[Agent.Field.X + 1][Agent.Field.Y]);
+                            target = Fields[Agent.Field.X + 1][Agent.Field.Y];
                             break;
                         case Agent.ORIENTATION.South:
-                            Agent.SetField(Fields[Agent.Field.X][Agent.Field.Y + 1]);
+                            target = Fields[Agent.Field.X][Agent.Field.Y + 1];
                             break;
                         case Agent.ORIENTATION.West:
-                            Agent.SetField(Fields[Agent.Field.X - 1][Agent.Field.Y]);
+                            target = Fields[Agent.Field.X - 1][Agent.Field.Y];
                             break;
                         default:
                             break;
                     }
+
+                    if (target.Content == Field.CONTENT.Food)
+                    {
+                        PopulateFieldsWithFood(1);
+                    }
+                    else if (target.Content == Field.CONTENT.Coins)
+                    {
+                        PopulateFieldsWithCoins(1);
+                    }
+
+                    Agent.SetField(target);
                 }
                 else
                 {

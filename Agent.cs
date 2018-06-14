@@ -69,7 +69,6 @@ namespace DSZI_2018
 
         private Sprite CreateSprite(ORIENTATION orientation)
         {
-            Console.WriteLine(orientation);
             string texturePath = "./assets/img/agent-";
             switch (orientation)
             {

@@ -10,6 +10,7 @@ namespace DSZI_2018
     public static class Config
     {
         public static string PATH_ASTAR = ".\\algorithms\\astar\\dist";
+        public static string PATH_PATH_FINDING = ".\\algorithms\\path_finding";
 
         public static int[][] FIELDS_WITH_SAND = { new int[] {0, 1}, new int[] {2, 2}, new int[] {3, 2}, new int[] {1, 4} };
 
@@ -17,7 +18,7 @@ namespace DSZI_2018
         public static int FIELD_COLUMNS_AMOUNT = 5;
 
         public static int WALLS_AMOUNT = 3;
-        public static int FIELDS_WITH_COINS_AMOUNT = 2;
+        public static int FIELDS_WITH_COINS_AMOUNT = 4;
         public static int FIELDS_WITH_FOOD_AMOUNT = 1;
 
         public static int FIELD_SIZE = 80;

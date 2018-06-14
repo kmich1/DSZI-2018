@@ -11,12 +11,11 @@ namespace DSZI_2018
 {
     public static class Algorithms
     {
-        public static List<Board.MOVE> FindWay(Field[][] fields, List<Wall> walls, Agent agent, Field targetField)
+        public static List<Board.MOVE> FindWay(Field[][] fields, List<Wall> walls, Agent agent)
         {
             string dimensions = (Config.FIELD_ROWS_AMOUNT * 2 - 1).ToString() + " " + (Config.FIELD_COLUMNS_AMOUNT * 2 - 1).ToString();
 
             string start = (agent.Field.Y * 2).ToString() + " " + (agent.Field.X * 2).ToString();
-            string target = (targetField.Y * 2).ToString() + " " + (targetField.X * 2).ToString();
 
             string obstacles = "";
             for (int i = 1; i < Config.FIELD_ROWS_AMOUNT * 2 - 1; i += 2)
@@ -32,6 +31,15 @@ namespace DSZI_2018
             string fieldsWithSand = "";
             foreach (int[] coords in Config.FIELDS_WITH_SAND)
                 fieldsWithSand += (coords[1] * 2).ToString() + " " + (coords[0] * 2).ToString() + " ";
+
+            string fieldsWithFood = "";
+            string fieldsWithCoins = "";
+            foreach (Field[] row in fields)
+                foreach (Field field in row)
+                    if (field.Content == Field.CONTENT.Food)
+                        fieldsWithFood += (field.Y * 2).ToString() + " " + (field.X * 2).ToString() + " " + field.Value.ToString() + " ";
+                    else if (field.Content == Field.CONTENT.Coins)
+                        fieldsWithCoins += (field.Y * 2).ToString() + " " + (field.X * 2).ToString() + " " + field.Value.ToString() + " ";
 
             string direction;
             switch (agent.Orientation)
@@ -55,33 +63,38 @@ namespace DSZI_2018
             Console.Write(
                 dimensions.Trim() + Environment.NewLine +
                 start.Trim() + Environment.NewLine +
-                target.Trim() + Environment.NewLine +
                 obstacles.Trim() + Environment.NewLine +
                 fieldsWithSand.Trim() + Environment.NewLine +
-                direction.Trim() + Environment.NewLine
+                direction.Trim() + Environment.NewLine +
+                fieldsWithFood.Trim() + Environment.NewLine +
+                fieldsWithCoins.Trim() + Environment.NewLine +
+                agent.Food.ToString().Trim() + Environment.NewLine +
+                agent.Coins.ToString().Trim() + Environment.NewLine
             );
             File.WriteAllText(
-                ".\\wejscie.txt", 
+                ".\\input.txt", 
                 dimensions.Trim() + Environment.NewLine + 
-                start.Trim() + Environment.NewLine + 
-                target.Trim() + Environment.NewLine + 
+                start.Trim() + Environment.NewLine +
                 obstacles.Trim() + Environment.NewLine +
                 fieldsWithSand.Trim() + Environment.NewLine +
-                direction.Trim() + Environment.NewLine
+                direction.Trim() + Environment.NewLine +
+                fieldsWithFood.Trim() + Environment.NewLine +
+                fieldsWithCoins.Trim() + Environment.NewLine +
+                agent.Food.ToString().Trim() + Environment.NewLine +
+                agent.Coins.ToString().Trim() + Environment.NewLine
             );
 
             var proc = new Process();
             proc.StartInfo.UseShellExecute = false;
             proc.StartInfo.RedirectStandardOutput = true;
-            proc.StartInfo.FileName = "java.exe";
-            proc.StartInfo.Arguments = "-jar " + Config.PATH_ASTAR + "\\alg.jar";
+            proc.StartInfo.FileName = "node";
+            proc.StartInfo.Arguments = Config.PATH_PATH_FINDING + "\\index.js";
             
             proc.Start();
             string output = proc.StandardOutput.ReadToEnd().Trim();
             proc.WaitForExit();
             
             List<Board.MOVE> result = new List<Board.MOVE>();
-            Console.WriteLine(output);
             for (int i = 0; i < output.Length; i++)
             {
                 Console.Write(output[i]);
@@ -99,7 +112,6 @@ namespace DSZI_2018
                         break;
                 }
             }
-            Console.Write('\n');
             return result;
         }
     }
