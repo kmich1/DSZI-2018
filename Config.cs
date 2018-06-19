@@ -11,15 +11,16 @@ namespace DSZI_2018
     {
         public static string PATH_ASTAR = ".\\algorithms\\astar\\dist";
         public static string PATH_PATH_FINDING = ".\\algorithms\\path_finding";
+        public static string PATH_BOARD_GENERATION = ".\\algorithms\\board_generation";
 
-        public static int[][] FIELDS_WITH_SAND = { new int[] {0, 1}, new int[] {2, 2}, new int[] {3, 2}, new int[] {1, 4} };
+        public static int[][] FIELDS_WITH_SAND = { /*new int[] {0, 1}, new int[] {2, 2}, new int[] {3, 2}, new int[] {1, 4}*/ };
 
-        public static int FIELD_ROWS_AMOUNT = 5;
-        public static int FIELD_COLUMNS_AMOUNT = 5;
+        public static int FIELD_ROWS_AMOUNT = 8;
+        public static int FIELD_COLUMNS_AMOUNT = 8;
 
-        public static int WALLS_AMOUNT = 3;
-        public static int FIELDS_WITH_COINS_AMOUNT = 4;
-        public static int FIELDS_WITH_FOOD_AMOUNT = 1;
+        public static int WALLS_AMOUNT = 15;
+        public static int FIELDS_WITH_COINS_AMOUNT = 10;
+        public static int FIELDS_WITH_FOOD_AMOUNT = 4;
 
         public static int FIELD_SIZE = 80;
         public static int GAP_SIZE = 10; // gaps between fields

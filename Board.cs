@@ -35,20 +35,16 @@ namespace DSZI_2018
                         .ToArray()
                 )
                 .ToArray();
+
+            BoardInput boardInput = Algorithms.CreateBoard(Fields);
+
+            Walls = boardInput.Walls;
             
-            Walls = GenerateUniqueFieldPairs(Config.WALLS_AMOUNT)
-                .Select(pair => new Wall(pair[0], pair[1]))
-                .ToList();
-            
-            Agent = new Agent(GetRandomEmptyField(), Agent.ORIENTATION.North);
+            Agent = boardInput.Agent;
 
             FoodBar = new FoodBar(Agent);
 
             CoinBar = new CoinBar(Agent);
-
-            PopulateFieldsWithCoins(Config.FIELDS_WITH_COINS_AMOUNT);
-
-            PopulateFieldsWithFood(Config.FIELDS_WITH_FOOD_AMOUNT);
 
             Shape = new RectangleShape(new Vector2f(Config.BOARD_WIDTH, Config.BOARD_HEIGHT))
             {
