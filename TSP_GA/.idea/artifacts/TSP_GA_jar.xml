@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TSP_GA:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TSP_GA_jar</output-path>
+    <root id="archive" name="TSP_GA.jar">
+      <element id="module-output" name="TSP_GA" />
+    </root>
+  </artifact>
+</component>
