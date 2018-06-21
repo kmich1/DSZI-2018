@@ -19,6 +19,9 @@ namespace DSZI_2018
 
         public CONTENT Content { get; private set; }
         private Sprite Sprite { get; set; }
+
+        private Sprite GrassSprite { get; set; }
+
         public int Value { get; private set; }
         public int Predicted { get; private set; }
 
@@ -64,6 +67,16 @@ namespace DSZI_2018
                 ),
                 Color = Color.Red,
             };
+
+            Texture texture = new Texture("./assets/img/grass.png");
+            GrassSprite = new Sprite(texture)
+            {
+                Scale = new Vector2f((float)Config.FIELD_SIZE / (float)texture.Size.X, (float)Config.FIELD_SIZE / (float)texture.Size.Y),
+                Position = new Vector2f(
+                    (X + 1) * Config.GAP_SIZE + X * Config.FIELD_SIZE,
+                    (Y + 1) * Config.GAP_SIZE + Y * Config.FIELD_SIZE
+                )
+            };
         }
 
         public void SetContent(CONTENT content, Sprite sprite = null, int value = 0, int predicted = 0)
@@ -83,6 +96,7 @@ namespace DSZI_2018
         public void Draw(RenderTarget target, RenderStates states)
         {
             target.Draw(Shape);
+            target.Draw(GrassSprite);
             if (Sprite != null)
             {
                 target.Draw(Sprite);

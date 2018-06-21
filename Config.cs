@@ -40,7 +40,7 @@ namespace DSZI_2018
 
         public static int FONT_SIZE = 20;
 
-        public static Color BACKGROUND_COLOR = new Color(230, 240, 245);
+        public static Color BACKGROUND_COLOR = new Color(179, 230, 179);
         public static Color FIELD_COLOR = new Color(230, 230, 220);
         public static Color FIELD_SAND_COLOR = new Color(170, 140, 80);
         public static Color WALL_COLOR = new Color(100, 90, 60);

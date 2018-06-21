@@ -22,6 +22,8 @@ namespace DSZI_2018
         private RectangleShape Shape { get; }
         private RectangleShape[] Borders { get; }
 
+        private Text RestartText { get; set; }
+
         private List<MOVE> Moves { get; }
 
         public Board()
@@ -74,6 +76,15 @@ namespace DSZI_2018
                     Position = new Vector2f(0, 0),
                     FillColor = Config.WALL_COLOR
                 },
+            };
+
+            RestartText = new Text("PRESS SPACE TO RETRY", new Font("./assets/fonts/Roboto-Bold.ttf"), 50)
+            {
+                Position = new Vector2f(
+                    Config.BOARD_WIDTH - 650,
+                    Config.BOARD_HEIGHT - 400
+                ),
+                Color = Color.Black,
             };
 
             Moves = new List<MOVE>();
@@ -152,10 +163,11 @@ namespace DSZI_2018
 
         public void CreatePath()
         {
-            Algorithms.FindWay(Fields, Walls, Agent, Algorithms.PickTargetField(Fields, Agent)).ForEach((MOVE move) => Moves.Add(move));
+            if (Moves.Count == 0)
+                Algorithms.FindWay(Fields, Walls, Agent, Algorithms.PickTargetField(Fields, Agent)).ForEach((MOVE move) => Moves.Add(move));
         }
 
-        public void Move()
+        public void Move(FinishGame finishGame)
         {
             if (Moves.Count > 0)
             {
@@ -190,7 +202,7 @@ namespace DSZI_2018
                         PopulateFieldsWithCoins(1);
                     }
 
-                    Agent.SetField(target);
+                    Agent.SetField(target, finishGame);
                 }
                 else
                 {
@@ -215,6 +227,9 @@ namespace DSZI_2018
 
             target.Draw(FoodBar);
             target.Draw(CoinBar);
+
+            if (Agent.Food <= 0)
+                target.Draw(RestartText);
         }
     }
 }

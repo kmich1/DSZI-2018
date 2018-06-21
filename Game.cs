@@ -21,9 +21,9 @@ namespace DSZI_2018
             Board.CreatePath();
         }
 
-        public void Move()
+        public void Move(FinishGame finishGame)
         {
-            Board.Move();
+            Board.Move(finishGame);
         }
 
         public void Update(RenderTarget target)

@@ -31,9 +31,9 @@ namespace DSZI_2018
             SetField(field);
         }
 
-        public void SetField(Field field)
+        public void SetField(Field field, FinishGame finishGame = null)
         {
-            Food = Math.Max(Food - 5, 0);
+            Food -= 5;
             switch (field.Content)
             {
                 case Field.CONTENT.Coins:
@@ -42,6 +42,11 @@ namespace DSZI_2018
                 case Field.CONTENT.Food:
                     Food = Math.Min(Food + field.Value, 100);
                     break;
+            }
+            if (Food <= 0)
+            {
+                Food = 0;
+                finishGame?.Invoke();
             }
             Field?.SetContent(Field.CONTENT.Empty);
             field.SetContent(Field.CONTENT.Agent, Sprite, 0);
