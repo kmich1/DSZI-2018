@@ -146,7 +146,7 @@ namespace DSZI_2018
             for (int i = 0; i < amount; ++i)
             {
                 Food food = Foods.GetRandomFood();
-                GetRandomEmptyField().SetContent(Field.CONTENT.Food, food.Sprite, food.Value);
+                GetRandomEmptyField().SetContent(Field.CONTENT.Food, food.Sprite, food.Value, food.Predicted);
             }
         }
 

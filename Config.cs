@@ -13,6 +13,7 @@ namespace DSZI_2018
         public static string PATH_PATH_FINDING = ".\\algorithms\\path_finding";
         public static string PATH_BOARD_GENERATION = ".\\algorithms\\board_generation";
         public static string PATH_COIN_RECOGNITION = ".\\algorithms\\coin_recognition";
+        public static string PATH_FOOD_RECOGNITION = ".\\algorithms\\food_recognition";
 
         public static int[][] FIELDS_WITH_SAND = { /*new int[] {0, 1}, new int[] {2, 2}, new int[] {3, 2}, new int[] {1, 4}*/ };
 

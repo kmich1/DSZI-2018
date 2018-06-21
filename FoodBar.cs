@@ -40,7 +40,7 @@ namespace DSZI_2018
                 FillColor = Config.FOOD_BAR_COLOR
             };
             
-            Text = new Text("FOOD", new Font("./assets/fonts/Roboto-Bold.ttf"), (uint)Config.FONT_SIZE)
+            Text = new Text("ENERGY", new Font("./assets/fonts/Roboto-Bold.ttf"), (uint)Config.FONT_SIZE)
             {
                 Position = new Vector2f(
                     Config.BOARD_WIDTH - Config.GAP_SIZE - Config.FOOD_BAR_WIDTH + 4,

@@ -14,12 +14,14 @@ namespace DSZI_2018
         public string Path;
         public Sprite Sprite;
         public int Value;
+        public int Predicted;
 
-        public Food(string path, Sprite sprite, int value)
+        public Food(string path, Sprite sprite, int value, int predicted)
         {
             Path = path;
             Sprite = sprite;
             Value = value;
+            Predicted = predicted;
         }
     }
 
@@ -34,15 +36,34 @@ namespace DSZI_2018
         {
             string path = Paths[Utils.GetRandom(0, Paths.Length)];
 
+            string foodType = path.Split('_')[0];
+
             Texture texture = new Texture("./data/foods/" + path);
             Sprite sprite = new Sprite(texture)
             {
                 Scale = new Vector2f((float)Config.FIELD_SIZE / (float)texture.Size.X, (float)Config.FIELD_SIZE / (float)texture.Size.Y)
             };
 
-            int value = Utils.GetRandom(2, 11) * 5;
+            int value = 0;
+            switch (foodType)
+            {
+                case "battery":
+                    value = 40;
+                    break;
+                case "powerbank":
+                    value = 20;
+                    break;
+                case "accumulator":
+                    value = 60;
+                    break;
+                case "socket":
+                    value = 80;
+                    break;
+            }
 
-            return new Food(path, sprite, value);
+            int predicted = Algorithms.FoodRecognition(path);
+
+            return new Food(path, sprite, value, predicted);
         }
     }
 }

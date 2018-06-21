@@ -156,7 +156,7 @@ namespace DSZI_2018
                 int foodX = outputFoods[i] % 2 == 0 ? outputFoods[i] / 2 : (outputFoods[i] - 1) / 2;
                 int foodY = outputFoods[i + 1] % 2 == 0 ? outputFoods[i + 1] / 2 : (outputFoods[i + 1] - 1) / 2;
                 Food food = Foods.GetRandomFood();
-                fields[foodX][foodY].SetContent(Field.CONTENT.Food, food.Sprite, food.Value);
+                fields[foodX][foodY].SetContent(Field.CONTENT.Food, food.Sprite, food.Value, food.Predicted);
             }
 
             int[] outputCoins = outputLines[4].Split(' ').Select((input) => Int32.Parse(input)).ToArray();
@@ -236,6 +236,33 @@ namespace DSZI_2018
                 }
             }
             return result;
+        }
+
+        public static int FoodRecognition(string path)
+        {
+            var proc = new Process();
+            proc.StartInfo.UseShellExecute = false;
+            proc.StartInfo.RedirectStandardOutput = true;
+            proc.StartInfo.FileName = "java";
+            proc.StartInfo.Arguments = "-jar " + Config.PATH_FOOD_RECOGNITION + "\\dist\\Images_1.jar " + path;
+
+            proc.Start();
+            string output = proc.StandardOutput.ReadToEnd().Trim();
+            proc.WaitForExit();
+
+            switch (output)
+            {
+                case "powerbank":
+                    return 20;
+                case "battery":
+                    return 40;
+                case "accumulator":
+                    return 60;
+                case "socket":
+                    return 80;
+                default:
+                    return 0;
+            }
         }
 
     }
