@@ -403,7 +403,7 @@ public class Images {
         try{
             
             String[] splitData = data.split("_");
-            String[] attributes = {"shape", "size", "tension", "loaded", "wire", "input", "type"};
+            String[] attributes = {"name","shape", "size", "tension", "loaded", "wire", "input", "type"};
             ArrayList<ArrayList<String>> res = new ArrayList<>();
             int i =0;
             for(String oneSplit : splitData){
