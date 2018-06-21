@@ -23,7 +23,10 @@ _UpgradeReport_Files/
 ###############
 # Directories #
 ###############
-bin/
+!bin/
+bin/*
+!bin/Debug/
+bin/Debug/*
 obj/
 TestResults/
 ###################
@@ -44,7 +47,6 @@ TestResults/
 *.dmg
 *.gz
 *.iso
-*.jar
 *.rar
 *.tar
 *.zip
@@ -272,3 +274,5 @@ FakesAssemblies/
 !OpenTK.Compatibility.dll
 !OpenTK.dll
 !SFML.Net/*
+/algorithms/astar/dist/
+/algorithms/astar/nbproject/private/

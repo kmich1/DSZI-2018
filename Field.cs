@@ -8,7 +8,7 @@ using SFML.System;
 
 namespace DSZI_2018
 {
-    class Field : Drawable
+    public class Field : Drawable
     {
         public enum CONTENT { Agent, Empty, Coins, Food };
 
@@ -19,7 +19,14 @@ namespace DSZI_2018
 
         public CONTENT Content { get; private set; }
         private Sprite Sprite { get; set; }
+
+        private Sprite GrassSprite { get; set; }
+
         public int Value { get; private set; }
+        public int Predicted { get; private set; }
+
+        private Text ValueText { get; set; }
+        private Text PredictedText { get; set; }
 
         public Field(int x, int y)
         {
@@ -28,6 +35,7 @@ namespace DSZI_2018
             Content = CONTENT.Empty;
             Sprite = null;
             Value = 0;
+            Predicted = 0;
 
             Shape = new RectangleShape(new Vector2f(Config.FIELD_SIZE, Config.FIELD_SIZE))
             {
@@ -37,22 +45,67 @@ namespace DSZI_2018
                 ),
                 FillColor = Config.FIELD_COLOR
             };
+
+            //foreach (int[] coords in Config.FIELDS_WITH_SAND)
+            //    if (X == coords[0] && Y == coords[1])
+            //        Shape.FillColor = Config.FIELD_SAND_COLOR;
+
+            ValueText = new Text(Value.ToString(), new Font("./assets/fonts/Roboto-Bold.ttf"), 15)
+            {
+                Position = new Vector2f(
+                    (X + 1) * Config.GAP_SIZE + X * Config.FIELD_SIZE + Config.FIELD_SIZE / 2 - 5,
+                    (Y + 1) * Config.GAP_SIZE + Y * Config.FIELD_SIZE + 5
+                ),
+                Color = Color.Green,
+            };
+
+            PredictedText = new Text(Value.ToString(), new Font("./assets/fonts/Roboto-Bold.ttf"), 15)
+            {
+                Position = new Vector2f(
+                    (X + 1) * Config.GAP_SIZE + X * Config.FIELD_SIZE + Config.FIELD_SIZE / 2 - 5,
+                    (Y + 1) * Config.GAP_SIZE + Y * Config.FIELD_SIZE + Config.FIELD_SIZE - 20
+                ),
+                Color = Color.Red,
+            };
+
+            Texture texture = new Texture("./assets/img/grass.png");
+            GrassSprite = new Sprite(texture)
+            {
+                Scale = new Vector2f((float)Config.FIELD_SIZE / (float)texture.Size.X, (float)Config.FIELD_SIZE / (float)texture.Size.Y),
+                Position = new Vector2f(
+                    (X + 1) * Config.GAP_SIZE + X * Config.FIELD_SIZE,
+                    (Y + 1) * Config.GAP_SIZE + Y * Config.FIELD_SIZE
+                )
+            };
         }
 
-        public void SetContent(CONTENT content, Sprite sprite = null, int value = 0)
+        public void SetContent(CONTENT content, Sprite sprite = null, int value = 0, int predicted = 0)
         {
             Content = content;
-            Sprite = sprite != null ? sprite : null;
+            Sprite = sprite ?? null;
             if (Sprite != null)
                 Sprite.Position = Shape.Position;
             Value = value;
+            Predicted = predicted;
+            ValueText.DisplayedString = Value.ToString();
+            ValueText.Position -= new Vector2f((float)ValueText.DisplayedString.Length / (float)2 * 5, 0);
+            PredictedText.DisplayedString = Predicted.ToString();
+            PredictedText.Position -= new Vector2f((float)PredictedText.DisplayedString.Length / (float)2 * 5, 0);
         }
 
         public void Draw(RenderTarget target, RenderStates states)
         {
             target.Draw(Shape);
+            target.Draw(GrassSprite);
             if (Sprite != null)
+            {
                 target.Draw(Sprite);
+                if (Content != CONTENT.Agent)
+                {
+                    target.Draw(ValueText);
+                    target.Draw(PredictedText);
+                }
+            }
         }
     }
 }

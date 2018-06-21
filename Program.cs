@@ -9,6 +9,7 @@ using SFML.System;
 
 namespace DSZI_2018
 {
+    public delegate void FinishGame();
     class Program
     {
         static void Main(string[] args)
@@ -17,15 +18,33 @@ namespace DSZI_2018
 
             Game game = new Game();
 
+            Clock clock = new Clock();
+
+            bool gameFinished = false;
+            FinishGame finishGame = new FinishGame(() => { gameFinished = true; });
+            
             window.Closed += (object sender, EventArgs arg) => window.Close();
             window.KeyPressed += (object sender, KeyEventArgs arg) =>
             {
                 if (arg.Code == Keyboard.Key.Space)
-                    game.MakeRandomMove();
+                    if (gameFinished)
+                    {
+                        game = new Game();
+                        gameFinished = false;
+                    }
+                    else
+                        game.CreatePath();
             };
 
             while (window.IsOpen)
             {
+                if (clock.ElapsedTime.AsMilliseconds() > 500)
+                {
+                    if (!gameFinished)
+                        game.Move(finishGame);
+                    clock.Restart();
+                }
+
                 window.DispatchEvents();
                 window.Clear(Config.BACKGROUND_COLOR);
                 game.Update(window);
