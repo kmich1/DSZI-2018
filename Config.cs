@@ -20,7 +20,7 @@ namespace DSZI_2018
         public static int FIELD_ROWS_AMOUNT = 8;
         public static int FIELD_COLUMNS_AMOUNT = 8;
 
-        public static int WALLS_AMOUNT = 15;
+        public static int WALLS_AMOUNT = 20;
         public static int FIELDS_WITH_COINS_AMOUNT = 10;
         public static int FIELDS_WITH_FOOD_AMOUNT = 4;
 

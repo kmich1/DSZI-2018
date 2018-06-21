@@ -152,7 +152,7 @@ namespace DSZI_2018
 
         public void CreatePath()
         {
-            Algorithms.FindWay(Fields, Walls, Agent).ForEach((MOVE move) => Moves.Add(move));
+            Algorithms.FindWay(Fields, Walls, Agent, Algorithms.PickTargetField(Fields, Agent)).ForEach((MOVE move) => Moves.Add(move));
         }
 
         public void Move()
