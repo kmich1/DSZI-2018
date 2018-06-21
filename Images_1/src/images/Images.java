@@ -46,98 +46,60 @@ public class Images {
         // TODO code application logic here
         
         
+       Condition rectangle = new Condition("rectangle");
+        Condition cylinder = new Condition("cylinder");
         Condition round = new Condition("round");
-        Condition oblong = new Condition("oblong");
         Condition other = new Condition("other");
         Condition big = new Condition("big");
         Condition medium = new Condition("medium");
         Condition small = new Condition("small");
-        Condition sweet = new Condition("sweet");
-        Condition bitter = new Condition("bitter");
-        Condition sour = new Condition("sour");
-        Condition red = new Condition("red");
-        Condition brown = new Condition("brown");
-        Condition orange = new Condition("orange");
-        Condition white = new Condition("white");
-        Condition green = new Condition("green");
-        Condition yellow = new Condition("yellow");
-        Condition purple = new Condition("purple");
-        Condition blue = new Condition("blue");
-        Condition pink = new Condition("pink");
-        Condition hard = new Condition("hard");
-        Condition soft = new Condition("soft");
-        Condition smooth= new Condition("smooth");
-        Condition rugged = new Condition("rugged");
+        Condition V1 = new Condition("V1");
+        Condition V4 = new Condition("V4");
+        Condition V5 = new Condition("V5");
+        Condition V6 = new Condition("V6");
+        Condition V9 = new Condition("V9");
+        Condition V12 = new Condition("V12");
+        Condition V14 = new Condition("V14");
+        Condition V230 = new Condition("V230");
+        Condition all = new Condition("all");
+        Condition empty = new Condition("empty");
+        Condition no = new Condition("no");
+        Condition usb = new Condition("usb");
+        Condition microusb = new Condition("microusb");
+        Condition none = new Condition("none");
+        Condition AA = new Condition("AA");
+        Condition AAA = new Condition("AAA");
+        Condition C = new Condition("C");
+        Condition D = new Condition("D");
+        Condition E = new Condition("E");
+        Condition F = new Condition("F");
         Condition yes = new Condition("yes");
-        Condition one = new Condition("one");
-        Condition few = new Condition("few");
-        Condition many = new Condition("many");
-        Condition lack = new Condition("lack");
-        Condition apple = new Condition("apple");
-        Condition lemon = new Condition("lemon");
-        Condition banana = new Condition("banana");
-        Condition watermelon = new Condition("watermelon");
-        Condition cucamber = new Condition("cucamber");
-        Condition tomato = new Condition("tomato");
-        Condition mandarin = new Condition("mandarin");
-        Condition cherry = new Condition("cherry");
-        Condition strawberry = new Condition("strawberry");
-        Condition raspberry = new Condition("raspberry");
-        Condition berry = new Condition("berry");
-        Condition pumpkin = new Condition("pumpkin");
-        Condition potato = new Condition("potato");
-        Condition paprika = new Condition("paprika");
-        Condition lime = new Condition("lime");
-        Condition plum = new Condition("plum");
-        Condition grape = new Condition("grape");
-        Condition kiwi = new Condition("kiwi");
-        Condition grapefruit = new Condition("grapefruit");
-        Condition pineapple = new Condition("pineapple");
-        Condition pear = new Condition("pear");
-        Condition eggplant = new Condition("eggplant");
-        Condition onion = new Condition("onion");
-        Condition chili = new Condition("chili");
-        Condition carrot = new Condition("carrot");
-        Condition corn = new Condition("corn");
-        Condition lettuce = new Condition("lettuce");
-        Condition olive = new Condition("olive");
-        Condition broccoli = new Condition("broccoli");
-        Condition cabbage = new Condition("cabbage");
-        Condition mushroom = new Condition("mushroom");
-        Condition garlic = new Condition("garlic");
-        Condition radish = new Condition("radish");
-        Condition greenbeen = new Condition("greenbeen");
-        Condition peach = new Condition("peach");
-        Condition apricot = new Condition("apricot");
-        Condition melon = new Condition("melon");
-        Condition leak = new Condition("leak");
-        Condition pea = new Condition("pea");
+        Condition battery  = new Condition("battery");
+        Condition accumulator  = new Condition("accumultor");
+        Condition socket  = new Condition("socket");
+        Condition powerbank  = new Condition("powerbank");
         
 
         
         
         Attribute[] real_attributes = new Attribute[7];
-        real_attributes[0] = new Attribute("shape", round, oblong, other);
+        real_attributes[0] = new Attribute("shape", rectangle, cylinder, round);
         real_attributes[1] = new Attribute("size", big, medium, small);
-        real_attributes[2] = new Attribute("taste", sweet, sour, bitter, other);
-        real_attributes[3] = new Attribute("color", red, white, brown, orange, green, yellow, purple, blue, pink );
-        real_attributes[4] = new Attribute("hardness", hard, soft);
-        real_attributes[5] = new Attribute("facture", smooth, rugged);
-        real_attributes[6] = new Attribute("seed", one, few, many, lack);
+        real_attributes[2] = new Attribute("tension", V1, V4, V5, V6, V9, V12, V14, V230); // napiecie
+        real_attributes[3] = new Attribute("loaded", yes, no ); // czy ladowany
+        real_attributes[4] = new Attribute("wire", yes, no); // przewod
+        real_attributes[5] = new Attribute("input", none, usb, microusb, other); // wejscie
+        real_attributes[6] = new Attribute("type", AA, AAA, V9, C, D, E, F, other);
         
         Attribute[] example_attributes = new Attribute[8];
-        example_attributes[0] = new Attribute("shape", round, oblong, other);
+        example_attributes[0] = new Attribute("shape", rectangle, cylinder);
         example_attributes[1] = new Attribute("size", big, medium, small);
-        example_attributes[2] = new Attribute("taste", sweet, sour, bitter, other);
-        example_attributes[3] = new Attribute("color", red, white, brown, orange, green, yellow, purple, blue );
-        example_attributes[4] = new Attribute("hardness", hard, soft);
-        example_attributes[5] = new Attribute("facture", smooth, rugged);
-        example_attributes[6] = new Attribute("seed", one, few, many, lack);
-        example_attributes[7] = new Attribute("name", apple, lemon, watermelon,banana, orange,mandarin,tomato,cucamber,
-                                                      cherry, strawberry, raspberry, berry,pumpkin, potato, paprika, lime,
-                                                      plum, grape, kiwi, grapefruit, pineapple, pear, eggplant, onion, chili,
-                                                      carrot, corn, lettuce, olive, broccoli, cabbage, mushroom, garlic,
-                                                      radish, greenbeen, peach, apricot, melon, leak, pea);
+        example_attributes[2] = new Attribute("tension", V1, V4, V5, V6, V9, V12, V14, V230);
+        example_attributes[3] = new Attribute("loaded", yes, no );
+        example_attributes[4] = new Attribute("wire", yes, no);
+        example_attributes[5] = new Attribute("input", none, usb, microusb, other);
+        example_attributes[6] = new Attribute("type", AA, AAA, V9, C, D, E,F,other);
+        example_attributes[7] = new Attribute("decision", battery, accumulator, socket, powerbank);
         
             
 
@@ -441,7 +403,7 @@ public class Images {
         try{
             
             String[] splitData = data.split("_");
-            String[] attributes = {"shape", "size", "taste", "color", "hardness", "facture", "seed"};
+            String[] attributes = {"shape", "size", "tension", "loaded", "wire", "input", "type"};
             ArrayList<ArrayList<String>> res = new ArrayList<>();
             int i =0;
             for(String oneSplit : splitData){
