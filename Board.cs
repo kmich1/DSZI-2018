@@ -137,7 +137,7 @@ namespace DSZI_2018
             for (int i = 0; i < amount; ++i)
             {
                 Coin coin = Coins.GetRandomCoin();
-                GetRandomEmptyField().SetContent(Field.CONTENT.Coins, coin.Sprite, coin.Value);
+                GetRandomEmptyField().SetContent(Field.CONTENT.Coins, coin.Sprite, coin.Value, coin.Predicted);
             }
         }
 

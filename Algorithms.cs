@@ -160,12 +160,13 @@ namespace DSZI_2018
             }
 
             int[] outputCoins = outputLines[4].Split(' ').Select((input) => Int32.Parse(input)).ToArray();
+            Coin[] coinObjects = Coins.GetRandomCoins(outputCoins.Length / 2);
             for (int i = 0; i < outputCoins.Length; i += 2)
             {
                 int coinX = outputCoins[i] % 2 == 0 ? outputCoins[i] / 2 : (outputCoins[i] - 1) / 2;
                 int coinY = outputCoins[i + 1] % 2 == 0 ? outputCoins[i + 1] / 2 : (outputCoins[i + 1] - 1) / 2;
-                Coin coin = Coins.GetRandomCoin();
-                fields[coinX][coinY].SetContent(Field.CONTENT.Coins, coin.Sprite, coin.Value);
+                Coin coin = coinObjects[i / 2];
+                fields[coinX][coinY].SetContent(Field.CONTENT.Coins, coin.Sprite, coin.Value, coin.Predicted);
             }
 
             List<Wall> wallsResult = new List<Wall>();
@@ -191,5 +192,51 @@ namespace DSZI_2018
 
             return new BoardInput(wallsResult, agent);
         }
+
+        public static int[] CoinRecognition(string[] paths)
+        {
+            string scriptArguments = "";
+            for (int i = 0; i < paths.Length; i++)
+                scriptArguments += paths[i] + ' ';
+
+            var proc = new Process();
+            proc.StartInfo.UseShellExecute = false;
+            proc.StartInfo.RedirectStandardOutput = true;
+            proc.StartInfo.FileName = "python";
+            proc.StartInfo.Arguments = Config.PATH_COIN_RECOGNITION + "\\predict.py " + scriptArguments.Trim();
+
+            proc.Start();
+            string output = proc.StandardOutput.ReadToEnd().Trim();
+            proc.WaitForExit();
+
+            int[] outputValues = output.Split(' ').Select((input) => Int32.Parse(input)).ToArray();
+            int[] result = new int[paths.Length];
+            for (int i = 0; i < outputValues.Length; i++)
+            {
+                switch (outputValues[i])
+                {
+                    case 0:
+                        result[i] = 10;
+                        break;
+                    case 1:
+                        result[i] = 100;
+                        break;
+                    case 2:
+                        result[i] = 25;
+                        break;
+                    case 3:
+                        result[i] = 5;
+                        break;
+                    case 4:
+                        result[i] = 50;
+                        break;
+                    default:
+                        result[i] = 0;
+                        break;
+                }
+            }
+            return result;
+        }
+
     }
 }
