@@ -23,7 +23,7 @@ namespace DSZI_2018
         {
             Orientation = orientation;
 
-            Food = 75;
+            Food = 100;
             Coins = 0;
 
             Sprite = CreateSprite(orientation);
@@ -33,7 +33,7 @@ namespace DSZI_2018
 
         public void SetField(Field field, FinishGame finishGame = null)
         {
-            Food -= 5;
+            Food -= 10;
             switch (field.Content)
             {
                 case Field.CONTENT.Coins:

@@ -192,7 +192,7 @@ namespace DSZI_2018
                         default:
                             break;
                     }
-
+                    /*
                     if (target.Content == Field.CONTENT.Food)
                     {
                         PopulateFieldsWithFood(1);
@@ -201,7 +201,7 @@ namespace DSZI_2018
                     {
                         PopulateFieldsWithCoins(1);
                     }
-
+                    */
                     Agent.SetField(target, finishGame);
                 }
                 else

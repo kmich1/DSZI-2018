@@ -29,7 +29,9 @@ namespace DSZI_2018
             foreach (Field[] row in fields)
                 foreach (Field field in row)
                     if (field.Content == Field.CONTENT.Food || field.Content == Field.CONTENT.Coins)
-                        input += field.X.ToString() + " " + field.Y.ToString() + " ";            File.WriteAllText(".\\inputga.txt", input.Trim());
+                        input += field.X.ToString() + " " + field.Y.ToString() + " ";
+
+            File.WriteAllText(".\\inputga.txt", input.Trim());
 
             var proc = new Process();
             proc.StartInfo.UseShellExecute = false;
@@ -85,7 +87,8 @@ namespace DSZI_2018
                 default:
                     direction = "";
                     break;
-            }            File.WriteAllText(
+            }
+            File.WriteAllText(
                 ".\\wejscie.txt",
                 dimensions.Trim() + Environment.NewLine +
                 start.Trim() + Environment.NewLine +
@@ -133,13 +136,13 @@ namespace DSZI_2018
             string foods = Config.FIELDS_WITH_FOOD_AMOUNT.ToString();
             string coins = Config.FIELDS_WITH_COINS_AMOUNT.ToString();
             
-            File.WriteAllText(".\\inputGenetic.txt", dimensions.Trim() + " " + walls.Trim() + " " + foods.Trim() + " " + coins.Trim());
+            File.WriteAllText(".\\config.txt", dimensions.Trim() + " " + walls.Trim() + " " + foods.Trim() + " " + coins.Trim());
 
             var proc = new Process();
             proc.StartInfo.UseShellExecute = false;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.FileName = "node";
-            proc.StartInfo.Arguments = Config.PATH_BOARD_GENERATION + "\\createBoard.js";
+            proc.StartInfo.Arguments = Config.PATH_BOARD_GENERATION + "\\index.js";
 
             proc.Start();
             string output = proc.StandardOutput.ReadToEnd().Trim();
